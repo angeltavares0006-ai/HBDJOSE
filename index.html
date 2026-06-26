@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Cumpleaños José 🎂</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: display serif + clean sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       CURSOR PERSONALIZADO
+  ═══════════════════════════════════════════ -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
+  <!-- ═══════════════════════════════════════════
+       CANVAS GLOBAL DE ESTRELLAS
+  ═══════════════════════════════════════════ -->
+  <canvas id="starsCanvas"></canvas>
+
+  <!-- ═══════════════════════════════════════════
+       PANTALLA DE BIENVENIDA (INTRO)
+  ═══════════════════════════════════════════ -->
+  <section id="intro" class="intro-screen">
+    <div class="intro-content">
+      <div class="intro-badge">✦ 26/06/2026 ✦</div>
+      <h1 class="intro-title">
+        Feliz cumpleaños<br />
+        <span class="gold-text">José</span>
+      </h1>
+      <p class="intro-subtitle">
+        No es una página...<br />
+        <em>es un pequeño viaje.</em>
+      </p>
+      <button class="btn-start" id="btnStart">
+        <span>Comenzar</span>
+        <div class="btn-glow"></div>
+      </button>
+    </div>
+    <!-- Partículas de bienvenida -->
+    <canvas id="introParticles"></canvas>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       CONTENIDO PRINCIPAL (oculto hasta que empieza)
+  ═══════════════════════════════════════════ -->
+  <main id="mainContent" class="hidden">
+
+    <!-- ─────────────────────────────────────────
+         SECCIÓN 1: CARTA / MÁQUINA DE ESCRIBIR
+    ───────────────────────────────────────── -->
+    <section class="section section-letter" id="sectionLetter">
+      <div class="section-inner">
+        <div class="letter-envelope">
+          <div class="letter-card glass-card">
+            <div class="letter-header">
+              <span class="letter-icon">✉</span>
+              <p class="letter-date">Para José, en su día</p>
+            </div>
+            <div class="typewriter-text" id="typewriterText"></div>
+            <div class="letter-signature hidden" id="letterSignature">
+              <div class="signature-line"></div>
+              <p>Con mucho cariño ♡</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Corazones flotantes -->
+      <div class="floating-hearts" id="floatingHearts"></div>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         SECCIÓN 2: ZELDA — EL MAPA ANTIGUO
+    ───────────────────────────────────────── -->
+    <section class="section section-zelda" id="sectionZelda">
+      <canvas id="zeldaParticles"></canvas>
+      <div class="section-inner">
+        <div class="zelda-map-frame">
+          <div class="map-corner tl"></div>
+          <div class="map-corner tr"></div>
+          <div class="map-corner bl"></div>
+          <div class="map-corner br"></div>
+          <div class="map-content">
+            <div class="triforce-icon">
+              <div class="tri tri-top"></div>
+              <div class="tri-bottom-row">
+                <div class="tri tri-bl"></div>
+                <div class="tri tri-br"></div>
+              </div>
+            </div>
+            <h2 class="zelda-title reveal-text">La aventura continúa.</h2>
+            <p class="zelda-body reveal-text">
+            Como en toda gran leyenda,<br />
+            hay héroes que comienzan su viaje sin saber a dónde los llevará el destino.<br /><br />
+
+            Dicen que en cada mundo existe un mapa por descubrir,<br />
+            lleno de caminos perdidos, cuevas oscuras y luces que guían sin prometer nada.<br /><br />
+
+            Pero incluso el héroe más valiente<br />
+            no puede atravesar todas las tierras en soledad.<br /><br />
+
+            Y es ahí donde aparece alguien especial...<br />
+            una presencia que no siempre hace ruido,<br />
+            pero que nunca abandona la aventura.<br /><br />
+
+            <strong>Gracias por ser esa persona que convirtió este viaje en algo que vale la pena recordar.</strong><br /><br />
+
+            No importa cuántas veces cambie el mapa,<br />
+            ni cuántos enemigos aparezcan en el camino...<br /><br />
+
+            mientras sigas aquí,<br />
+            esta seguirá siendo mi mejor misión.</strong>
+            </p>
+            <button class="btn-zelda" id="btnZelda">
+              ▶ Siguiente misión
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         SECCIÓN 3: NINTENDO — TARJETAS
+    ───────────────────────────────────────── -->
+    <section class="section section-nintendo" id="sectionNintendo">
+      <div class="section-inner">
+        <div class="nintendo-logo-text reveal-text">✦ POWER UP ✦</div>
+        <h2 class="section-title reveal-text">Tus mejores stats</h2>
+        <div class="nintendo-cards">
+          <div class="n-card glass-card reveal-card">
+            <div class="n-card-icon">🎮</div>
+            <h3>Nunca dejaste<br />de jugar</h3>
+            <div class="n-card-bar"><div class="n-card-fill" style="--fill:95%"></div></div>
+          </div>
+          <div class="n-card glass-card reveal-card">
+            <div class="n-card-icon">⭐</div>
+            <h3>Siempre<br />estuviste</h3>
+            <div class="n-card-bar"><div class="n-card-fill" style="--fill:100%"></div></div>
+          </div>
+          <div class="n-card glass-card reveal-card">
+            <div class="n-card-icon">❤️</div>
+            <h3>Mejor hermano<br />mayor</h3>
+            <div class="n-card-bar"><div class="n-card-fill" style="--fill:100%"></div></div>
+          </div>
+          <div class="n-card glass-card reveal-card">
+            <div class="n-card-icon">🏆</div>
+            <h3>Gracias<br />por todo</h3>
+            <div class="n-card-bar"><div class="n-card-fill" style="--fill:98%"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         SECCIÓN 4: PSYDUCK — TERNURA
+    ───────────────────────────────────────── -->
+<section class="section section-psyduck" id="sectionPsyduck">
+  
+  <div class="bubbles-container" id="bubblesContainer"></div>
+
+  <div class="section-inner">
+
+    <!-- FIGURA -->
+    <div class="psyduck-figure">
+      <img src="assets/Psyduck.gif" class="psy-gif" alt="Psyduck caminando">
+      <div class="psy-swirl">～ ？ ～</div>
+    </div>
+
+    <!-- TEXTO -->
+    <div class="psyduck-text">
+      <h2 class="reveal-text">
+        A veces todos nos sentimos<br/>como Psyduck.
+      </h2>
+
+      <p class="reveal-text">
+        Confundidos.<br />
+        Perdidos en la cabeza.<br />
+        Pero <strong>siempre encontramos el camino.</strong>
+      </p>
+
+      <p class="psy-note reveal-text">
+        Y está bien no tener todas las respuestas.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+    <!-- ─────────────────────────────────────────
+         SECCIÓN 5: COWBOY BEBOP — ESPACIO
+    ───────────────────────────────────────── -->
+    <section class="section section-bebop" id="sectionBebop">
+      <canvas id="bebopStars"></canvas>
+      <div class="section-inner bebop-inner">
+        <div class="bebop-slash"></div>
+        <h2 class="bebop-title reveal-text">See you,<br /><span>Space Cowboy...</span></h2>
+        <p class="bebop-sub reveal-text">  “Whatever happens, happens.” — Spike Spiegel<br/>
+  Y quizá la vida va de eso… de seguir aunque no entiendas todo.<br/>
+  Gracias por compartir este camino conmigo, hermano.<br/>
+  Feliz cumpleaños.
+</p>
+        <div class="bebop-line reveal-text">— 2026 —</div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         SECCIÓN 6: MÚSICA
+    ───────────────────────────────────────── -->
+    <section class="section section-music" id="sectionMusic">
+      <div class="section-inner">
+        <h2 class="section-title reveal-text">La música también<br/>guarda recuerdos.</h2>
+        <div class="music-player-wrap">
+          <div class="music-waves" id="musicWaves">
+            <!-- Generadas por JS -->
+          </div>
+          <div class="music-player glass-card">
+            <div class="music-album-art">
+              <div class="album-ring ring1"></div>
+              <div class="album-ring ring2"></div>
+              <div class="album-ring ring3"></div>
+              <div class="album-disc" id="albumDisc">
+                <span>♪</span>
+              </div>
+            </div>
+            <div class="music-info">
+              <p class="music-song">Para José</p>
+              <p class="music-artist">Con cariño, siempre</p>
+            </div>
+            <div class="music-controls">
+              <button class="music-btn" id="prevBtn">⏮</button>
+              <button class="music-btn play-btn" id="playBtn">▶</button>
+              <button class="music-btn" id="nextBtn">⏭</button>
+            </div>
+            <div class="music-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+              </div>
+              <div class="progress-times">
+                <span id="currentTime">0:00</span>
+                <span>3:47</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="music-caption reveal-text">
+          <em>Hay canciones que ya siempre me recordarán a ti.</em>
+        </p>
+      </div>
+      <audio id="audioPlayer">
+  <source src="assets/music/en-tu-dia.mp3" type="audio/mpeg">
+</audio>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         SECCIÓN 7: GALERÍA POLAROID
+    ───────────────────────────────────────── -->
+    <section class="section section-gallery" id="sectionGallery">
+  <div class="section-inner">
+
+    <h2 class="section-title reveal-text">
+      Momentos que<br/>guardamos.
+    </h2>
+
+    <p class="section-sub reveal-text">
+      Haz clic en cada foto para verla.
+    </p>
+
+    <div class="polaroid-grid">
+
+      <div class="polaroid reveal-card" data-label="El comienzo">
+        <div class="polaroid-photo pola-1">
+          <img src="assets/foto1.jpeg" alt="El comienzo">
+          <div class="pola-overlay"></div>
+        </div>
+        <p>Un gran romance ✦</p>
+      </div>
+
+      <div class="polaroid reveal-card" data-label="Aventuras">
+        <div class="polaroid-photo pola-2">
+          <img src="assets/foto2.jpeg" alt="Aventuras">
+          <div class="pola-overlay"></div>
+        </div>
+        <p>Primeras aventuras</p>
+      </div>
+
+      <div class="polaroid reveal-card" data-label="Risas">
+        <div class="polaroid-photo pola-3">
+          <img src="assets/foto3.jpeg" alt="Risas">
+          <div class="pola-overlay"></div>
+        </div>
+        <p>Un logro más juntos</p>
+      </div>
+
+      <div class="polaroid reveal-card" data-label="Siempre">
+        <div class="polaroid-photo pola-4">
+          <img src="assets/foto4.jpeg" alt="Siempre presente">
+          <div class="pola-overlay"></div>
+        </div>
+        <p>Una gran amistad</p>
+      </div>
+
+      <div class="polaroid reveal-card" data-label="Gracias">
+        <div class="polaroid-photo pola-5">
+          <img src="assets/foto5.jpeg" alt="Gracias José">
+          <div class="pola-overlay"></div>
+        </div>
+        <p>18's</p>
+      </div>
+
+      <div class="polaroid reveal-card" data-label="Futuro">
+        <div class="polaroid-photo pola-6">
+          <img src="assets/foto6.jpeg" alt="Lo que viene">
+          <div class="pola-overlay"></div>
+        </div>
+        <p>Secado en sombra?</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal de foto -->
+  <div class="photo-modal hidden" id="photoModal">
+    <div class="photo-modal-overlay" id="photoModalOverlay"></div>
+    <div class="photo-modal-content">
+      <div class="photo-modal-inner" id="photoModalInner"></div>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+  </div>
+</section>
+
+    <!-- ─────────────────────────────────────────
+         SECCIÓN 8: LOGROS DESBLOQUEADOS
+    ───────────────────────────────────────── -->
+    <section class="section section-achievements" id="sectionAchievements">
+      <div class="section-inner">
+        <div class="ach-label reveal-text">ACHIEVEMENT UNLOCKED</div>
+        <h2 class="section-title reveal-text">Logros<br/>desbloqueados</h2>
+        <div class="achievements-grid">
+          <div class="achievement glass-card reveal-card">
+            <div class="ach-glow"></div>
+            <div class="ach-icon">🏆</div>
+            <div class="ach-text">
+              <h4>Mejor hermano mayor</h4>
+              <div class="ach-stars">★★★★★</div>
+            </div>
+            <div class="ach-shine"></div>
+          </div>
+          <div class="achievement glass-card reveal-card">
+            <div class="ach-glow"></div>
+            <div class="ach-icon">🏆</div>
+            <div class="ach-text">
+              <h4>Siempre presente</h4>
+              <div class="ach-stars">★★★★★</div>
+            </div>
+            <div class="ach-shine"></div>
+          </div>
+          <div class="achievement glass-card reveal-card">
+            <div class="ach-glow"></div>
+            <div class="ach-icon">🏆</div>
+            <div class="ach-text">
+              <h4>Mejor consejero</h4>
+              <div class="ach-stars">★★★★★</div>
+            </div>
+            <div class="ach-shine"></div>
+          </div>
+          <div class="achievement glass-card reveal-card">
+            <div class="ach-glow"></div>
+            <div class="ach-icon">🏆</div>
+            <div class="ach-text">
+              <h4>Gracias por crecer<br/>conmigo</h4>
+              <div class="ach-stars">★★★★★</div>
+            </div>
+            <div class="ach-shine"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         SECCIÓN 9: FINAL EMOTIVO
+    ───────────────────────────────────────── -->
+    <section class="section section-finale" id="sectionFinale">
+      <canvas id="finaleCanvas"></canvas>
+      <div class="confetti-container" id="confettiContainer"></div>
+      <div class="section-inner finale-inner">
+        <div class="finale-text" id="finaleText">
+          <p class="finale-line" id="fl1">Para muchos eres mi tío.</p>
+          <p class="finale-line" id="fl2">Pero para mí...</p>
+          <p class="finale-line finale-big" id="fl3">siempre serás el hermano mayor<br/>que la vida decidió regalarme.</p>
+          <div class="finale-divider" id="flDivider">✦ ✦ ✦</div>
+          <p class="finale-line" id="fl4">Gracias por todos estos años.</p>
+          <p class="finale-line finale-gold" id="fl5">Feliz cumpleaños, José.</p>
+          <p class="finale-line finale-heart" id="fl6">Te quiero muchísimo. ♡</p>
+        </div>
+        <button class="btn-restart hidden" id="btnRestart">
+          ↺ Volver a vivir esta aventura
+        </button>
+      </div>
+    </section>
+
+  </main><!-- /mainContent -->
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -98,21 +98,25 @@
 (function initIntroParticles() {
   const canvas = document.getElementById('introParticles');
   if (!canvas) return;
+
   const ctx = canvas.getContext('2d');
+
   let W, H;
 
   function resize() {
-    W = canvas.width  = canvas.offsetWidth;
+    W = canvas.width = canvas.offsetWidth;
     H = canvas.height = canvas.offsetHeight;
   }
+
   window.addEventListener('resize', resize);
   resize();
 
   const particles = [];
+
   for (let i = 0; i < 80; i++) {
     particles.push({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
+      x: Math.random() * W,   // 👈 FIX
+      y: Math.random() * H,   // 👈 FIX
       vx: (Math.random() - .5) * .4,
       vy: (Math.random() - .5) * .4,
       r: Math.random() * 2 + .5,
@@ -123,18 +127,40 @@
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
+
     particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0) p.x = W;
+      if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H;
+      if (p.y > H) p.y = 0;
+
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      const color = p.gold ? `rgba(201,168,76,${p.alpha})` : `rgba(255,255,255,${p.alpha * .5})`;
+
+      const color = p.gold
+        ? `rgba(201,168,76,${p.alpha})`
+        : `rgba(255,255,255,${p.alpha * 0.5})`;
+
       ctx.fillStyle = color;
       ctx.fill();
     });
+
     requestAnimationFrame(draw);
   }
+function resize() {
+  const dpr = window.devicePixelRatio || 1;
+
+  W = canvas.offsetWidth;
+  H = canvas.offsetHeight;
+
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+
+  ctx.scale(dpr, dpr);
+}
   draw();
 })();
 
@@ -282,21 +308,24 @@ function initScrollReveal() {
 function initZeldaParticles() {
   const canvas = document.getElementById('zeldaParticles');
   if (!canvas) return;
+
   const ctx = canvas.getContext('2d');
   let W, H;
 
   function resize() {
-    W = canvas.width  = canvas.offsetWidth  || window.innerWidth;
-    H = canvas.height = canvas.offsetHeight || window.innerHeight;
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
   }
+
   window.addEventListener('resize', resize);
   resize();
 
   const gp = [];
+
   for (let i = 0; i < 60; i++) {
     gp.push({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
+      x: Math.random() * W,   // 👈 FIX
+      y: Math.random() * H,   // 👈 FIX
       vy: -(Math.random() * .6 + .2),
       vx: (Math.random() - .5) * .3,
       r: Math.random() * 2.5 + .5,
@@ -306,21 +335,25 @@ function initZeldaParticles() {
 
   function drawGoldParticles() {
     ctx.clearRect(0, 0, W, H);
+
     gp.forEach(p => {
-      p.y += p.vy; p.x += p.vx;
+      p.x += p.vx;
+      p.y += p.vy;
       p.life -= .003;
+
       if (p.life <= 0 || p.y < 0) {
         p.x = Math.random() * W;
         p.y = H + 10;
         p.life = Math.random() * .8 + .2;
       }
+
       const alpha = Math.min(p.life * 2, .7);
+
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(201,168,76,${alpha})`;
       ctx.fill();
 
-      // Brillo
       if (p.r > 1.5) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r * 2, 0, Math.PI * 2);
@@ -328,11 +361,12 @@ function initZeldaParticles() {
         ctx.fill();
       }
     });
+
     requestAnimationFrame(drawGoldParticles);
   }
+
   drawGoldParticles();
 }
-
 
 /* ───────────────────────────────────────────
    9. PSYDUCK — BURBUJAS

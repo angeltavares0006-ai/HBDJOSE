@@ -127,7 +127,12 @@ button { cursor: none; border: none; outline: none; font-family: var(--font-body
 #introParticles {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
   pointer-events: none;
+  width: 100vw;
+  height: 100vh;
 }
 
 .intro-content {
@@ -342,7 +347,12 @@ main { position: relative; z-index: 1; }
 #zeldaParticles {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
   pointer-events: none;
+  width: 100vw;
+  height: 100vh;
 }
 
 .zelda-map-frame {
@@ -564,9 +574,13 @@ main { position: relative; z-index: 1; }
 #bebopStars {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
   pointer-events: none;
+    filter: blur(0.3px);
+  opacity: 0.9; 
 }
-
 .bebop-inner { display: flex; flex-direction: column; align-items: center; }
 
 .bebop-slash {
@@ -927,7 +941,12 @@ main { position: relative; z-index: 1; }
 #finaleCanvas {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
   pointer-events: none;
+    filter: blur(0.5px);
+  opacity: 0.85;
 }
 .confetti-container {
   position: absolute;
